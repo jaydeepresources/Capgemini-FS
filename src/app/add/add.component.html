@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="jumbotron py-4">
+    <p class="mb-0 h3 text-center">Add Books</p>
+  </div>
+
+  <form #addForm="ngForm" (ngSubmit)="addBook(addForm)">
+    <div class="form-group">
+      <label>ID</label>
+      <input type="number" class="form-control" placeholder="Enter ID" name="id" #id="ngModel" [(ngModel)]="newBook.id" required>
+      <div class="alert alert-danger" *ngIf="id.dirty && id.invalid">
+        ID can't be empty
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" placeholder="Enter Title" name="title" #title="ngModel" [(ngModel)]="newBook.title"
+        required>
+      <div class="alert alert-danger" *ngIf="title.dirty && title.invalid">
+        Title can't be empty
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Author</label>
+      <input type="text" class="form-control" placeholder="Enter Author" name="author" #author="ngModel" [(ngModel)]="newBook.author"
+        required>
+      <div class="alert alert-danger" *ngIf="author.dirty && author.invalid">
+        Author can't be empty
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Year</label>
+      <input type="number" class="form-control" placeholder="Enter Year" name="year" #year="ngModel" [(ngModel)]="newBook.year"
+        required>
+      <div class="alert alert-danger" *ngIf="year.dirty && year.invalid">
+        Year can't be empty
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="addForm.pristine || addForm.invalid">Add Book</button>
+
+  </form>
+
+  <div class="alert alert-dismissible alert-success mt-4" *ngIf="successFlag">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Well done!</strong> Book added successfully !
+  </div>
+
+</div>

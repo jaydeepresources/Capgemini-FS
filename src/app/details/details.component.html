@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="jumbotron py-4">
+        <p class="mb-0 h2 text-center">Book List</p>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Book ID</th>
+                <th scope="col">Book Title</th>
+                <th scope="col">Book Author</th>
+                <th scope="col">Book Publishing Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="">
+                <th scope="row">
+                    <input type="text" class="form-control" placeholder="Enter Id" [(ngModel)]="searchedId" (input)="searchById()">
+                </th>
+                <td>
+                    <input type="text" class="form-control" placeholder="Enter Title" [(ngModel)]="searchedTitle" (input)="searchByTitle()">
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Enter Author" [(ngModel)]="searchedAuthor" (input)="searchByAuthor()">
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Enter Publishing Year" [(ngModel)]="searchedYear" (input)="searchByYear()">
+                </td>
+            </tr>
+            
+            <tr class="" *ngFor="let book of booksService.books">
+                <th scope="row" *ngIf="!searchedId && !searchedTitle && !searchedAuthor && !searchedYear">{{book.id}}</th>
+                <td *ngIf="!searchedId && !searchedTitle && !searchedAuthor && !searchedYear">{{book.title}}</td>
+                <td *ngIf="!searchedId && !searchedTitle && !searchedAuthor && !searchedYear">{{book.author}}</td>
+                <td *ngIf="!searchedId && !searchedTitle && !searchedAuthor && !searchedYear">{{book.year}}</td>
+            </tr>
+
+            <tr class="" *ngFor="let book of booksService.filteredBooks">
+                <th scope="row" *ngIf="searchedId || searchedTitle || searchedAuthor || searchedYear">{{book.id}}</th>
+                <td *ngIf="searchedId || searchedTitle || searchedAuthor || searchedYear">{{book.title}}</td>
+                <td *ngIf="searchedId || searchedTitle || searchedAuthor || searchedYear">{{book.author}}</td>
+                <td *ngIf="searchedId || searchedTitle || searchedAuthor || searchedYear">{{book.year}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>
