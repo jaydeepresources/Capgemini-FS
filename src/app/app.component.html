@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="jumbotron py-4">
+        <p class="h1 text-center mb-0">Lab 3 : Template Forms</p>
+    </div>
+
+    <form (ngSubmit)="productFormSubmit(productForm)" #productForm="ngForm">
+        <fieldset>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Product ID</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" #id="ngModel" name="id" [(ngModel)]="product.id" required>
+                    <div class="alert alert-danger" *ngIf="id.dirty && id.invalid">
+                        Id can't be empty
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Product Name</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" #name="ngModel" name="name" [(ngModel)]="product.name" required>
+                    <div class="alert alert-danger" *ngIf="name.dirty && name.invalid">
+                        Name can't be empty
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Product Cost</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" #cost="ngModel" name="cost" [(ngModel)]="product.cost" required>
+                    <div class="alert alert-danger" *ngIf="cost.dirty && cost.invalid">
+                        Cost can't be empty
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Product Online</label>
+                <div class="col-sm-5">
+                    <div class="form-check py-2">
+                        <label class="form-check-label mr-5">
+                            <input type="radio" name="online" #yes="ngModel" value="yes" [(ngModel)]="product.online" class="form-check-input">Yes
+                        </label>
+                        <label class="form-check-label">
+                            <input type="radio" name="online" #no="ngModel" value="no" [(ngModel)]="product.online" class="form-check-input">No
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Product Category</label>
+                <div class="col-sm-5">
+                    <select class="form-control" #category="ngModel" name="category" [(ngModel)]="product.category" required>
+                        <option value="Grocery">Grocery</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="Electronics">Electronics </option>
+                        <option value="Clothes">Clothes</option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="category.dirty && category.invalid">
+                        Category can't be empty
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Available in Store</label>
+                <div class="col-sm-8">
+                    <div class="form-check py-2">
+                        <label class="form-check-label mr-5">
+                            <input class="form-check-input" type="checkbox" value="Big Bazar" name="BigBazar" #BigBazar="ngModel" [(ngModel)]="product.avalaibilities[0].bigBazar">Big Bazar
+                        </label>
+                        <label class="form-check-label mr-5">
+                            <input class="form-check-input" type="checkbox" value="DMART" name="DMART" #DMART="ngModel" [(ngModel)]="product.avalaibilities[1].dmart">DMART
+                        </label>
+                        <label class="form-check-label mr-5">
+                            <input class="form-check-input" type="checkbox" value="Reliance" name="Reliance" #Reliance="ngModel" [(ngModel)]="product.avalaibilities[2].reliance">Reliance
+                        </label>
+                        <label class="form-check-label mr-5">
+                            <input class="form-check-input" type="checkbox" value="Mega Store" name="MegaStore" #MegaStore="ngModel" [(ngModel)]="product.avalaibilities[3].megaStore">Mega Store
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="productForm.pristine || productForm.invalid || product.online == '' || 
+            (!product.avalaibilities[0].bigBazar && !product.avalaibilities[1].dmart && !product.avalaibilities[2].reliance && !product.avalaibilities[3].megaStore)">
+            Add Product</button>
+        </fieldset>
+    </form>
+
+</div>
